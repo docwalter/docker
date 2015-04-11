@@ -12,6 +12,8 @@ ADD			my.cnf /etc/mysql/conf.d/my.cnf
 ADD			run-mysql-server.sh /run-mysql-server.sh
 RUN			chmod +x /run-mysql-server.sh
 
+EXPOSE		3306
+
 VOLUME		["/var/lib/mysql"]
 
 CMD			["/run-mysql-server.sh"]
