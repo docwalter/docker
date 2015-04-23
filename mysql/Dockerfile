@@ -5,7 +5,7 @@ MAINTAINER	Philipp Walter, philipp.walter@gmail.com
 RUN			apt-get update && DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y && \
 			# Install MySQL server
 			DEBIAN_FRONTEND=noninteractive apt-get install -yq mysql-server && \
-			# Clean up APT when done
+			# Clean up when done
 			apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD			my.cnf /etc/mysql/conf.d/my.cnf 
