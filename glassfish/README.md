@@ -1,20 +1,25 @@
-Docker Image with Java 8 Server JRE
-===================================
+Docker Image with GlassFish 4.1 on Oracle Server JRE 8
+======================================================
 
-Based upon an updated `phusion/baseimage` enhanced with the latest Java 8 Server JRE from Oracle.
+GlassFish 4.1 (Web Profile) is installed in `/opt/glassfish4` with a symlink `/opt/glassfish`.
 
-Java 8 is installed in `/opt/jdk...` with an `/opt/java` symlink. The `java` command is exposed as `/usr/bin/java` using `update-alternatives`.
+Console process: non-forked glassfish binary
+
+
 
 ```shell
+# build image from scratch
+docker build -t docwalter/glassfish .
+
 # run as daemon
-docker run -d --name=java docwalter/java:latest
+docker run -d --name=glassfish docwalter/glassfish
 
-# connect local shell
-docker exec -it java bash -l
+# spawn a local `asadmin` client shell within the container
+docker exec -it glassfish asadmin
 
-# check Java version
-root@...:/# java -version
-java version "1.8.0_25"
-Java(TM) SE Runtime Environment (build 1.8.0_25-b17)
-Java HotSpot(TM) 64-Bit Server VM (build 25.25-b02, mixed mode)
+# connect to console with log (disconnect with C-p C-q)
+docker attach glassfish
+
+# spawn a parallel shell process
+docker exec -it glassfish bash -l
 ```
