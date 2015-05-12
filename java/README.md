@@ -1,9 +1,9 @@
 Java 8 Server JRE on Debian
 ===========================
 
-the latest Java 8 Server JRE from Oracle. Based on `docwalter/debian` enhanced with 
+The latest Java 8 Server JRE from Oracle on `docwalter/debian`.
 
-Java 8 is installed in `/opt/jdk...` with an `/opt/java` symlink. The `java` command is exposed as `/usr/bin/java` using `update-alternatives`.
+Java 8 is installed in `/opt/jdk...` with an `/opt/java` symlink. The `java` and other JDK commands are exposed by appending `/opt/java/bin` to `PATH`.
 
 ```shell
 # run as daemon
