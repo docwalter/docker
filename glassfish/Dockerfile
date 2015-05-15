@@ -19,7 +19,11 @@ RUN         cd $GLASSFISH_HOME && chmod 600 passwordfile && \
             grep -v AS_ADMIN_PASSWORD passwordfile | sed -e 's/AS_ADMIN_NEWPASSWORD/AS_ADMIN_PASSWORD/g' > newpasswordfile && \
             mv passwordfile oldpasswordfile && mv newpasswordfile passwordfile && chmod 600 passwordfile && \
             # enable remote admin access at the web interface on port 4848
-            asadmin --passwordfile=passwordfile enable-secure-admin && asadmin restart-domain && \
+            asadmin --passwordfile=passwordfile enable-secure-admin && \
+            # change mode to server JRE
+            asadmin --passwordfile=passwordfile delete-jvm-options -client && \
+            asadmin --passwordfile=passwordfile create-jvm-options -server && \
+            asadmin restart-domain && \
             # environment variables, e.g. PATH, are not available when executing "docker exec bash -l", so persist it for login shells
             env | grep -vwe '_\|HOSTNAME\|PWD\|SHLVL' | awk '{print "export " $0}' > /etc/profile.d/environment.sh
 
